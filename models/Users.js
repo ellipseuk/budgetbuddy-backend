@@ -29,7 +29,7 @@ const Users = sequelize.define('Users', {
         defaultValue: DataTypes.NOW,
     }
 }, {
-    timestamps: false, // Disables automatic use of createdAt and updatedAt
+    timestamps: false,
 });
 
 module.exports = Users;
