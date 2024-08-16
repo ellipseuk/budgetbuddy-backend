@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./config/postgres');
-const userRoutes = require('./routes/userRoutes');
+const sequelize = require('./src/config/postgres.js');
+const userRoutes = require('./src/routes/userRoutes.js');
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ const startServer = async () => {
     try {
         await sequelize.authenticate();
         console.log('Database connected successfully.');
-        await sequelize.sync();
+        await sequelize.sync({ force: true });
         app.listen(3000, () => console.log('Server is running on port 3000'));
     } catch (error) {
         console.error('Database connection failed:', error);
