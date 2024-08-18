@@ -4,31 +4,30 @@ const { isUsernameValid, isEmailValid, isPasswordValid } = require('../validatio
 const verifyEmailDomain = require('../services/dnsService');
 const { sendConfirmationEmail, tempUsers } = require('../services/emailService');
 
+const validateUserInput = (username, email, password) => 
+    isUsernameValid(username) && isEmailValid(email) && isPasswordValid(password);
+
 const createUser = async (req, res) => {
     try {
         let { username, email, password } = req.body;
-
         username = username.toLowerCase();
 
-        if (!isUsernameValid(username) || !isEmailValid(email) || !isPasswordValid(password)) {
+        if (!validateUserInput(username, email, password)) {
             return res.status(400).json({ error: 'Invalid input data.' });
         }
 
-        const existingUser = await Users.findOne({ where: { email } });
-        if (existingUser) {
+        if (await Users.findOne({ where: { email } })) {
             return res.status(409).json({ error: 'Email already exists' });
         }
 
-        const emailDomainValid = await verifyEmailDomain(email);
-        if (!emailDomainValid) {
-            return res.status(400).json({ error: 'Email domain is invalid or does not exist.' });
+        if (!await verifyEmailDomain(email)) {
+            return res.status(400).json({ error: 'Invalid email domain.' });
         }
 
         await sendConfirmationEmail(username, email, password);
-
-        res.status(200).json({ message: 'Confirmation email sent. Please confirm your email to complete registration.' });
+        res.status(200).json({ message: 'Confirmation email sent.' });
     } catch (error) {
-        console.error('Error creating user:', error.message);
+        console.error('Error creating user:', error);
         res.status(500).json({ error: 'Error creating user' });
     }
 };
@@ -36,43 +35,29 @@ const createUser = async (req, res) => {
 const confirmEmail = async (req, res) => {
     try {
         const { token } = req.query;
-
         const userData = tempUsers.get(token);
-        if (!userData) {
-            return res.status(400).json({ error: 'Invalid or expired token' });
-        }
+        if (!userData) return res.status(400).json({ error: 'Invalid or expired token' });
 
         const { username, email, password } = userData;
-
-        const hashedPassword = await hashPassword(password);
-        const newUser = await Users.create({ username, email, password: hashedPassword });
+        const newUser = await Users.create({ username, email, password: await hashPassword(password) });
 
         tempUsers.delete(token);
-
-        res.status(201).json({ message: 'Email confirmed and user created successfully.', user: newUser });
+        res.status(201).json({ message: 'Email confirmed, user created.', user: newUser });
     } catch (error) {
-        console.error('Error confirming email:', error.message);
+        console.error('Error confirming email:', error);
         res.status(500).json({ error: 'Error confirming email' });
     }
 };
 
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-
     try {
+        const { email, password } = req.body;
         const user = await Users.findOne({ where: { email } });
-        if (!user) {
+        if (!user || !await verifyPassword(user.password, password)) {
             return res.status(401).json({ error: 'Invalid email or password.' });
         }
 
-        const validPassword = await verifyPassword(user.password, password);
-        if (!validPassword) {
-            return res.status(401).json({ error: 'Invalid email or password.' });
-        }
-
-        const token = generateToken(user);
-        res.status(200).json({ message: 'Login successful', token });
-
+        res.status(200).json({ message: 'Login successful', token: generateToken(user) });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Server error during login.' });
@@ -80,19 +65,13 @@ const loginUser = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-    const { email, newPassword } = req.body;
-
     try {
+        const { email, newPassword } = req.body;
         const user = await Users.findOne({ where: { email } });
-        if (!user) {
-            return res.status(404).json({ error: 'User not found.' });
-        }
+        if (!user) return res.status(404).json({ error: 'User not found.' });
 
-        const hashedPassword = await hashPassword(newPassword);
-        await user.update({ password: hashedPassword });
-
+        await user.update({ password: await hashPassword(newPassword) });
         res.status(200).json({ message: 'Password reset successful.' });
-
     } catch (error) {
         console.error('Password reset error:', error);
         res.status(500).json({ error: 'Server error during password reset.' });
