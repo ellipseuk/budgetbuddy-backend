@@ -1,26 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const sequelize = require('./src/config/postgres.js');
-const userRoutes = require('./src/routes/userRoutes.js');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const app = require('./app');
+const connectDB = require('./config/db');
 
-const app = express();
-app.use(bodyParser.json());
+// Load environment variables
+dotenv.config();
 
-// Routes
-app.get('/', (req, res) => res.send('Server is running'));
-app.use('/api', userRoutes);
+// Connect to database
+connectDB();
 
-// Database Connection
-const startServer = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Database connected successfully.');
-        await sequelize.sync();
-        app.listen(3000, () => console.log('Server is running on port 3000'));
-    } catch (error) {
-        console.error('Database connection failed:', error);
-        app.listen(3000, () => console.log('Server is running on port 3000, but database connection failed'));
-    }
-};
+const PORT = process.env.PORT || 3000;
 
-startServer();
+app.listen(PORT, () => {
+  console.log(`The server is running on the port: ${PORT}`);
+});
