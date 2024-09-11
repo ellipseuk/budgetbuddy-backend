@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 
+// Update a user
 const updateUser = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
