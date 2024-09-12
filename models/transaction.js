@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Define the transaction schema
 const transactionSchema = new mongoose.Schema({
   amount: {
     type: Number,
@@ -21,16 +22,10 @@ const transactionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: false,
+    required: false, // Set to true after adding authentication
   },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  updated_at: {
-    type: Date,
-    default: Date.now,
-  },
+}, {
+  timestamps: true,
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

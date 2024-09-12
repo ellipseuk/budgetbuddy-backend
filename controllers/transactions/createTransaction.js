@@ -1,5 +1,6 @@
 const Transaction = require('../../models/transaction');
 
+// Create a transaction
 const createTransaction = async (req, res) => {
   const { amount, type, description } = req.body;
   try {
@@ -14,11 +15,9 @@ const createTransaction = async (req, res) => {
       data: newTransaction,
     });
   } catch (err) {
-    console.error('Error creating transaction:', err.message);
     res.status(400).json({
       status: 'error',
       message: 'Error creating transaction',
-      eror: err.message,
     });
   }
 };
