@@ -6,17 +6,19 @@ const getTransaction = require('../controllers/transactions/getTransaction');
 const updateTransaction = require('../controllers/transactions/updateTransaction');
 const deleteTransaction = require('../controllers/transactions/deleteTransaction');
 
+const protect = require('../middlewares/auth');
+
 const router = express.Router();
 
 router
   .route('/')
-  .get(getAllTransactions)
-  .post(createTransaction);
+  .get(protect, getAllTransactions)
+  .post(protect, createTransaction);
 
 router
   .route('/:id')
-  .get(getTransaction)
-  .patch(updateTransaction)
-  .delete(deleteTransaction);
+  .get(protect, getTransaction)
+  .patch(protect, updateTransaction)
+  .delete(protect, deleteTransaction);
 
 module.exports = router;

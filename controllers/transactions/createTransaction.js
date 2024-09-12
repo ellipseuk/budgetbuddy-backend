@@ -9,7 +9,7 @@ const createTransaction = async (req, res) => {
       amount,
       type,
       description,
-      // user: req.user.id,
+      user: req.user.id,
     });
     
     res.status(201).json({
