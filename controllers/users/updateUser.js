@@ -13,6 +13,7 @@ const updateUser = async (req, res) => {
       return res.status(404).json({
         status: 'fail',
         message: 'User not found',
+        error: err.message,
       });
     }
 
@@ -24,6 +25,7 @@ const updateUser = async (req, res) => {
     res.status(400).json({
       status: 'error',
       message: 'Error updating user',
+      error: err.message,
     });
   }
 };
