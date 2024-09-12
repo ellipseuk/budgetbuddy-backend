@@ -9,6 +9,7 @@ const deleteTransaction = async (req, res) => {
       return res.status(404).json({
         status: 'fail',
         message: 'Transaction not found',
+        error: err.message,
       });
     }
 
@@ -21,6 +22,7 @@ const deleteTransaction = async (req, res) => {
     res.status(500).json({
       status: 'error',
       message: 'Error deleting transaction',
+      error: err.message,
     });
   }
 };

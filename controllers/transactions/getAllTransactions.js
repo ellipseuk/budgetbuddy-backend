@@ -4,6 +4,7 @@ const Transaction = require('../../models/transaction');
 const getAllTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.find(/*{ user: req.user.id }*/);
+    
     res.status(200).json({
       status: 'success',
       results: transactions.length,

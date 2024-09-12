@@ -9,6 +9,7 @@ const getTransaction = async (req, res) => {
       return res.status(404).json({
         status: 'fail',
         message: 'Transaction not found',
+        error: err.message,
       });
     }
 
@@ -20,6 +21,7 @@ const getTransaction = async (req, res) => {
     res.status(500).json({
       status: 'error',
       message: 'Error retrieving transaction',
+      error: err.message,
     });
   }
 };
