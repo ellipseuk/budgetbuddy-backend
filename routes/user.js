@@ -10,7 +10,7 @@ const deleteUser = require('../controllers/users/deleteUser');
 const registerUser = require('../controllers/users/registerUser');
 const loginUser = require('../controllers/users/loginUser');
 
-// 
+// Import the registerValidation and loginValidation middlewares
 const registerValidation = require('../validators/users/registerValidation');
 const loginValidation = require('../validators/users/loginValidation');
 

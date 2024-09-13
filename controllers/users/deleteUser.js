@@ -12,7 +12,7 @@ const deleteUser = async (req, res) => {
       });
     }
 
-    res.status(204).json({ 
+    res.status(200).json({ 
       status: 'success', 
       data: null });
   } catch (err) {

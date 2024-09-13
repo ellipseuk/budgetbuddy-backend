@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const protect = async (req, res, next) => {
+const auth = async (req, res, next) => {
   let token;
   
   // Check if token is in the header
@@ -10,7 +10,9 @@ const protect = async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(401).json({ error: 'Authorization denied, no token provided' });
+    return res.status(401).json({ 
+      error: 'Authorization denied, no token provided' 
+    });
   }
 
   try {
@@ -20,15 +22,19 @@ const protect = async (req, res, next) => {
     // Find user by id
     const user = await User.findById(decoded.id);
     if (!user) {
-      return res.status(401).json({ error: 'User not found, authorization denied' });
+      return res.status(401).json({ 
+        error: 'User not found, authorization denied' 
+      });
     }
 
     // Set user in req object
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token, authorization denied' });
+    res.status(401).json({ 
+      error: 'Invalid token, authorization denied' 
+    });
   }
 };
 
-module.exports = protect;
+module.exports = auth;

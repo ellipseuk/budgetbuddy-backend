@@ -1,11 +1,14 @@
 const { validationResult } = require('express-validator');
 const User = require('../../models/user');
+const jwt = require('jsonwebtoken');
 
 // Login a user
 const loginUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ 
+      errors: errors.array() 
+    });
   }
 
   try {
@@ -14,13 +17,17 @@ const loginUser = async (req, res) => {
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: 'Invalid credentials' });
+      return res.status(400).json({ 
+        error: 'Invalid credentials' 
+      });
     }
 
     // Check if password is correct
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
-      return res.status(400).json({ error: 'Invalid credentials' });
+      return res.status(400).json({ 
+        error: 'Invalid credentials' 
+      });
     }
 
     // Generate a token
@@ -38,7 +45,9 @@ const loginUser = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      error: error.message 
+    });
   }
 };
 
