@@ -6,6 +6,14 @@ const getUser = require('../controllers/users/getUser');
 const updateUser = require('../controllers/users/updateUser');
 const deleteUser = require('../controllers/users/deleteUser');
 
+// Import the registerUser and loginUser controllers
+const registerUser = require('../controllers/users/registerUser');
+const loginUser = require('../controllers/users/loginUser');
+
+// Import the registerValidation and loginValidation middlewares
+const registerValidation = require('../validators/users/registerValidation');
+const loginValidation = require('../validators/users/loginValidation');
+
 const router = express.Router();
 
 router
@@ -18,5 +26,8 @@ router
   .get(getUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+router.post('/register', registerValidation, registerUser);
+router.post('/login', loginValidation, loginUser);
 
 module.exports = router;

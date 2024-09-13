@@ -6,7 +6,7 @@ const updateTransaction = async (req, res) => {
 
   try {
     const transaction = await Transaction.findOneAndUpdate(
-      { _id: req.params.id, /*user: req.user.id*/ },
+      { _id: req.params.id, user: req.user.id },
       { amount, type, description, updated_at: Date.now() },
       { new: true, runValidators: true }
     );

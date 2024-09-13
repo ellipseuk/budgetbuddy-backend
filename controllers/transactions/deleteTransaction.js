@@ -3,7 +3,7 @@ const Transaction = require('../../models/transaction');
 // Delete a transaction
 const deleteTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findOneAndDelete({ _id: req.params.id, /*user: req.user.id*/ });
+    const transaction = await Transaction.findOneAndDelete({ _id: req.params.id, user: req.user.id });
 
     if (!transaction) {
       return res.status(404).json({

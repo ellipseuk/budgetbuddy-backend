@@ -1,9 +1,9 @@
 const Transaction = require('../../models/transaction');
 
 // Get all transactions
-const getAllTransactions = async (req, res) => {
+const getAllUserTransactions = async (req, res) => {
   try {
-    const transactions = await Transaction.find(/*{ user: req.user.id }*/);
+    const transactions = await Transaction.find({ user: req.user.id });
     
     res.status(200).json({
       status: 'success',
@@ -19,4 +19,4 @@ const getAllTransactions = async (req, res) => {
   }
 };
 
-module.exports = getAllTransactions;
+module.exports = getAllUserTransactions;

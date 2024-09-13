@@ -3,7 +3,7 @@ const Transaction = require('../../models/transaction');
 // Get a transaction
 const getTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findOne({ _id: req.params.id, /*user: req.user.id*/ });
+    const transaction = await Transaction.findOne({ _id: req.params.id, user: req.user.id });
 
     if (!transaction) {
       return res.status(404).json({
