@@ -1,6 +1,6 @@
 const express = require('express');
 
-const getAllUserTransactions = require('../controllers/transactions/getAllTransactions');
+const getAllUserTransactions = require('../controllers/transactions/getAllUserTransactions');
 const createTransaction = require('../controllers/transactions/createTransaction');
 const getTransaction = require('../controllers/transactions/getTransaction');
 const updateTransaction = require('../controllers/transactions/updateTransaction');
