@@ -1,4 +1,4 @@
-const Category = require('../../models/Category');
+const Category = require('../../models/category');
 
 // Delete a category
 const deleteCategory = async (req, res) => {
