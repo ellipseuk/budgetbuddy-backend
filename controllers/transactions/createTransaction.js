@@ -10,6 +10,7 @@ const createTransaction = async (req, res) => {
       type,
       description,
       category: req.body.category,
+      subcategory: req.body.subcategory,
       user: req.user.id,
     });
     

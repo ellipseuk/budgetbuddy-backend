@@ -1,7 +1,7 @@
 const Category = require('../../models/category');
 
 // Get all categories that belong to the user
-const getAllUserCategories = async (req, res) => {
+const getAllCategories = async (req, res) => {
   try {
     // Find all categories that belong to the user
     const categories = await Category.find({ 
@@ -16,9 +16,10 @@ const getAllUserCategories = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 'error',
-      message: 'Error retrieving categories'
+      message: 'Error retrieving categories',
+      error: error.message,
     });
   }
 };
 
-module.exports = getAllUserCategories;
+module.exports = getAllCategories;
