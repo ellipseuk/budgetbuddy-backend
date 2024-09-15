@@ -9,6 +9,7 @@ const createTransaction = async (req, res) => {
       amount,
       type,
       description,
+      category: req.body.category,
       user: req.user.id,
     });
     
