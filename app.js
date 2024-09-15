@@ -4,7 +4,8 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/user');
 const transactionRoutes = require('./routes/transaction');
-const categoriesRoutes = require('./routes/categories');
+const categoriesRoutes = require('./routes/category');
+const subcategoriesRoutes = require('./routes/subcategory');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoriesRoutes);
+app.use('/api/subcategories', subcategoriesRoutes);
 
 module.exports = app;

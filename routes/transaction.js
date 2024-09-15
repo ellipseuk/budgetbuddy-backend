@@ -1,6 +1,6 @@
 const express = require('express');
 
-const getAllUserTransactions = require('../controllers/transactions/getAllUserTransactions');
+const getAllTransactions = require('../controllers/transactions/getAllTransactions');
 const createTransaction = require('../controllers/transactions/createTransaction');
 const getTransaction = require('../controllers/transactions/getTransaction');
 const updateTransaction = require('../controllers/transactions/updateTransaction');
@@ -12,7 +12,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(auth, getAllUserTransactions)
+  .get(auth, getAllTransactions)
   .post(auth, createTransaction);
 
 router
