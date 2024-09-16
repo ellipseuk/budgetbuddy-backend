@@ -1,6 +1,8 @@
-const { validationResult } = require('express-validator');
-const User = require('../../models/user');
-const jwt = require('jsonwebtoken');
+import { validationResult } from 'express-validator';
+import User from '../../models/user.js';
+import pkg from 'jsonwebtoken';
+
+const { sign } = pkg;
 
 // Register a new user
 const registerUser = async (req, res) => {
@@ -22,7 +24,7 @@ const registerUser = async (req, res) => {
     const user = await User.create({ username, email, password });
 
     // Generate a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(201).json({
       status: 'success',
@@ -42,4 +44,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = registerUser;
+export default registerUser;

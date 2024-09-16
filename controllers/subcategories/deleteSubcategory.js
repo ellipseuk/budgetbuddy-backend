@@ -1,5 +1,6 @@
-const Subcategory = require('../../models/subcategory');
+import Subcategory from '../../models/subcategory.js';
 
+// Delete a subcategory
 const deleteSubcategory = async (req, res) => {
   try {
     const subcategory = await Subcategory.findByIdAndDelete(req.params.id);
@@ -23,4 +24,4 @@ const deleteSubcategory = async (req, res) => {
   }
 };
 
-module.exports = deleteSubcategory;
+export default deleteSubcategory;

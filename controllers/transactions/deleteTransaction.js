@@ -1,4 +1,4 @@
-const Transaction = require('../../models/transaction');
+import Transaction from '../../models/transaction.js';
 
 // Delete a transaction
 const deleteTransaction = async (req, res) => {
@@ -30,4 +30,4 @@ const deleteTransaction = async (req, res) => {
   }
 };
 
-module.exports = deleteTransaction;
+export default deleteTransaction;

@@ -1,4 +1,4 @@
-const Subcategory = require('../../models/subcategory');
+import Subcategory from '../../models/subcategory.js';
 
 // Get all user subcategories
 const getAllSubcategories = async (req, res) => {
@@ -19,4 +19,4 @@ const getAllSubcategories = async (req, res) => {
   }
 };
 
-module.exports = getAllSubcategories;
+export default getAllSubcategories;

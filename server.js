@@ -1,7 +1,6 @@
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const app = require('./app');
-const connectDB = require('./config/db');
+import dotenv from 'dotenv';
+import app from './app.js';
+import connectDB from './config/db.js';
 
 // Load environment variables
 dotenv.config();
@@ -12,5 +11,5 @@ connectDB();
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`The server is running on the port: ${PORT}`);
+  console.log(`The server is running on port: ${PORT}`);
 });

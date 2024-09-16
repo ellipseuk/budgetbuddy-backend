@@ -1,4 +1,4 @@
-const Subcategory = require('../../models/subcategory');
+import Subcategory from '../../models/subcategory.js';
 
 // Get user subcategory by id
 const getSubcategory = async (req, res) => {
@@ -25,4 +25,4 @@ const getSubcategory = async (req, res) => {
   }
 };
 
-module.exports = getSubcategory;
+export default getSubcategory;

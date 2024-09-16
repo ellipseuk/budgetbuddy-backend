@@ -1,4 +1,4 @@
-const Transaction = require('../../models/transaction');
+import Transaction from '../../models/transaction.js';
 
 // Get all transactions
 const getAllTransactions = async (req, res) => {
@@ -21,4 +21,4 @@ const getAllTransactions = async (req, res) => {
   }
 };
 
-module.exports = getAllTransactions;
+export default getAllTransactions;

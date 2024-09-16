@@ -1,20 +1,20 @@
-const express = require('express');
+import { Router } from 'express';
 
-const getAllUsers = require('../controllers/users/getAllUsers');
-const createUser = require('../controllers/users/createUser');
-const getUser = require('../controllers/users/getUser');
-const updateUser = require('../controllers/users/updateUser');
-const deleteUser = require('../controllers/users/deleteUser');
+import getAllUsers from '../controllers/users/getAllUsers.js';
+import createUser from '../controllers/users/createUser.js';
+import getUser from '../controllers/users/getUser.js';
+import updateUser from '../controllers/users/updateUser.js';
+import deleteUser from '../controllers/users/deleteUser.js';
 
 // Import the registerUser and loginUser controllers
-const registerUser = require('../controllers/users/registerUser');
-const loginUser = require('../controllers/users/loginUser');
+import registerUser from '../controllers/users/registerUser.js';
+import loginUser from '../controllers/users/loginUser.js';
 
 // Import the registerValidation and loginValidation middlewares
-const registerValidation = require('../validators/users/registerValidation');
-const loginValidation = require('../validators/users/loginValidation');
+import registerValidation from '../validators/users/registerValidation.js';
+import loginValidation from '../validators/users/loginValidation.js';
 
-const router = express.Router();
+const router = Router();
 
 router
   .route('/')
@@ -30,4 +30,4 @@ router
 router.post('/register', registerValidation, registerUser);
 router.post('/login', loginValidation, loginUser);
 
-module.exports = router;
+export default router;

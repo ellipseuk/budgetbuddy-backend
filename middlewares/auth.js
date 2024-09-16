@@ -1,6 +1,9 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+import pkg from 'jsonwebtoken';
+import User from '../models/user.js';
 
+const { verify } = pkg;
+
+// Middleware to protect routes
 const auth = async (req, res, next) => {
   let token;
   
@@ -17,7 +20,7 @@ const auth = async (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = verify(token, process.env.JWT_SECRET);
 
     // Find user by id
     const user = await User.findById(decoded.id);
@@ -37,4 +40,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+export default auth;

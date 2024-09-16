@@ -1,4 +1,4 @@
-const { check } = require('express-validator');
+import { check } from 'express-validator';
 
 // Validate user registration
 const registerValidation = [
@@ -7,4 +7,4 @@ const registerValidation = [
   check('password', 'Password must be at least 6 characters long').isLength({ min: 6 })
 ];
 
-module.exports = registerValidation;
+export default registerValidation;

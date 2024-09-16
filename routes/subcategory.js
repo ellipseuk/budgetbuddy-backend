@@ -1,14 +1,14 @@
-const express = require('express');
+import { Router } from 'express';
 
-const createSubcategory = require('../controllers/subcategories/createSubcategory');
-const getAllSubcategories = require('../controllers/subcategories/getAllSubcategories');
-const getSubcategory = require('../controllers/subcategories/getSubcategory');
-const updateSubcategory = require('../controllers/subcategories/updateSubcategory');
-const deleteSubcategory = require('../controllers/subcategories/deleteSubcategory');
+import createSubcategory from '../controllers/subcategories/createSubcategory.js';
+import getAllSubcategories from '../controllers/subcategories/getAllSubcategories.js';
+import getSubcategory from '../controllers/subcategories/getSubcategory.js';
+import updateSubcategory from '../controllers/subcategories/updateSubcategory.js';
+import deleteSubcategory from '../controllers/subcategories/deleteSubcategory.js';
 
-const auth = require('../middlewares/auth');
+import auth from '../middlewares/auth.js';
 
-const router = express.Router();
+const router = Router();
 
 router
   .route('/')
@@ -21,4 +21,4 @@ router
   .patch(auth, updateSubcategory)
   .delete(auth, deleteSubcategory);
 
-module.exports = router;
+export default router;

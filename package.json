@@ -1,6 +1,14 @@
 {
+  "name": "budgetbuddy-backend",
+  "version": "0.1.0",
+  "description": "Backend for the BudgetBuddy app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
-    "@xavisoft/mongoose-cascade": "^0.1.2",
     "argon2": "^0.41.1",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -14,8 +22,6 @@
   "devDependencies": {
     "nodemon": "^3.1.4"
   },
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  }
+  "author": "darthpenetratus",
+  "license": "MIT"
 }

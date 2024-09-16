@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+import User from '../../models/user.js';
 
 // Create a new user
 const createUser = async (req, res) => {
@@ -17,4 +17,4 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+export default createUser;

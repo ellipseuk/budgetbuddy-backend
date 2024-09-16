@@ -1,4 +1,4 @@
-const Subcategory = require('../../models/subcategory');
+import Subcategory from '../../models/subcategory.js';
 
 // Create a new subcategory
 const createSubcategory = async (req, res) => {
@@ -23,4 +23,4 @@ const createSubcategory = async (req, res) => {
   }
 };
 
-module.exports = createSubcategory;
+export default createSubcategory;

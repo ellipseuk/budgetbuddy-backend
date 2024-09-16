@@ -1,14 +1,14 @@
-const express = require('express');
+import { Router } from 'express';
 
-const createCategory = require('../controllers/categories/createCategory');
-const getAllCategories = require('../controllers/categories/getAllCategories');
-const getCategory = require('../controllers/categories/getCategory');
-const updateCategory = require('../controllers/categories/updateCategory');
-const deleteCategory = require('../controllers/categories/deleteCategory');
+import createCategory from '../controllers/categories/createCategory.js';
+import getAllCategories from '../controllers/categories/getAllCategories.js';
+import getCategory from '../controllers/categories/getCategory.js';
+import updateCategory from '../controllers/categories/updateCategory.js';
+import deleteCategory from '../controllers/categories/deleteCategory.js';
 
-const auth = require('../middlewares/auth');
+import auth from '../middlewares/auth.js';
 
-const router = express.Router();
+const router = Router();
 
 router
   .route('/')
@@ -21,4 +21,4 @@ router
   .patch(auth, updateCategory)
   .delete(auth, deleteCategory);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const Category = require('../../models/category');
+import Category from '../../models/category.js';
 
 // Delete a category
 const deleteCategory = async (req, res) => {
@@ -14,7 +14,7 @@ const deleteCategory = async (req, res) => {
     }
 
     // Delete the category
-    await Category.findByIdAndDelete(req.params.id);
+    await findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: 'success',
@@ -29,4 +29,4 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-module.exports = deleteCategory;
+export default deleteCategory;

@@ -1,14 +1,14 @@
-const express = require('express');
+import { Router } from 'express';
 
-const getAllTransactions = require('../controllers/transactions/getAllTransactions');
-const createTransaction = require('../controllers/transactions/createTransaction');
-const getTransaction = require('../controllers/transactions/getTransaction');
-const updateTransaction = require('../controllers/transactions/updateTransaction');
-const deleteTransaction = require('../controllers/transactions/deleteTransaction');
+import getAllTransactions from '../controllers/transactions/getAllTransactions.js';
+import createTransaction from '../controllers/transactions/createTransaction.js';
+import getTransaction from '../controllers/transactions/getTransaction.js';
+import updateTransaction from '../controllers/transactions/updateTransaction.js';
+import deleteTransaction from '../controllers/transactions/deleteTransaction.js';
 
-const auth = require('../middlewares/auth');
+import auth from '../middlewares/auth.js';
 
-const router = express.Router();
+const router = Router();
 
 router
   .route('/')
@@ -21,4 +21,4 @@ router
   .patch(auth, updateTransaction)
   .delete(auth, deleteTransaction);
 
-module.exports = router;
+export default router;

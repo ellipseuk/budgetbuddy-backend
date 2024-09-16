@@ -1,4 +1,4 @@
-const Category = require('../../models/category');
+import Category from '../../models/category.js';
 
 // Create a new category
 const createCategory = async (req, res) => {
@@ -24,4 +24,4 @@ const createCategory = async (req, res) => {
   }
 };
 
-module.exports = createCategory;
+export default createCategory;

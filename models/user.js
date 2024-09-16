@@ -1,8 +1,8 @@
-const argon2 = require('argon2');
-const mongoose = require('mongoose');
+import { hash, verify } from 'argon2';
+import { Schema, model } from 'mongoose';
 
 // Define the user schema
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     required: [true, 'User must have a name'],
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   try {
-    this.password = await argon2.hash(this.password);
+    this.password = await hash(this.password);
     next();
   } catch (err) {
     return next(err);
@@ -37,9 +37,9 @@ userSchema.pre('save', async function (next) {
 
 // Method to compare the password
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await argon2.verify(this.password, candidatePassword);
+  return await verify(this.password, candidatePassword);
 };
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
-module.exports = User;
+export default User;

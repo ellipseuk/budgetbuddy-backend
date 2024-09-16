@@ -1,4 +1,4 @@
-const Transaction = require('../../models/transaction');
+import Transaction from '../../models/transaction.js';
 
 // Update a transaction
 const updateTransaction = async (req, res) => {
@@ -32,4 +32,4 @@ const updateTransaction = async (req, res) => {
   }
 };
 
-module.exports = updateTransaction;
+export default updateTransaction;
