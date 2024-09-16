@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 // Define the subcategory schema
-const subcategorySchema = new mongoose.Schema({
+const subcategorySchema = new Schema({
   name: {
     type: String,
     required: [true, 'Subcategory must have a name'],
@@ -11,14 +11,14 @@ const subcategorySchema = new mongoose.Schema({
     default: ''
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Category',
-    required: true
+    required: true,
   },
 }, {
   timestamps: true,
 });
 
-const Subcategory = mongoose.model('Subcategory', subcategorySchema);
+const Subcategory = model('Subcategory', subcategorySchema);
 
-module.exports = Subcategory;
+export default Subcategory;

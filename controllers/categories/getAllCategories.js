@@ -1,4 +1,4 @@
-const Category = require('../../models/category');
+import Category from '../../models/category.js';
 
 // Get all categories that belong to the user
 const getAllCategories = async (req, res) => {
@@ -22,4 +22,4 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = getAllCategories;
+export default getAllCategories;

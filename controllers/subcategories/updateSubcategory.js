@@ -1,5 +1,6 @@
-const Subcategory = require('../../models/subcategory');
+import Subcategory from '../../models/subcategory.js';
 
+// Update a subcategory
 const updateSubcategory = async (req, res) => {
   try {
     const subcategory = await Subcategory.findByIdAndUpdate(req.params.id, req.body, {
@@ -28,4 +29,4 @@ const updateSubcategory = async (req, res) => {
   }
 };
 
-module.exports = updateSubcategory;
+export default updateSubcategory;

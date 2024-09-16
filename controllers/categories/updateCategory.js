@@ -1,4 +1,4 @@
-const Category = require('../../models/category');
+import Category from '../../models/category.js';
 
 // Update a category
 const updateCategory = async (req, res) => {
@@ -35,4 +35,4 @@ const updateCategory = async (req, res) => {
   }
 };
 
-module.exports = updateCategory;
+export default updateCategory;

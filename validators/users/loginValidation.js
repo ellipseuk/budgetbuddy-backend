@@ -1,4 +1,4 @@
-const { check } = require('express-validator');
+import { check } from 'express-validator';
 
 // Validate user login
 const loginValidation = [
@@ -6,4 +6,4 @@ const loginValidation = [
   check('password', 'Password is required').not().isEmpty()
 ];
 
-module.exports = loginValidation;
+export default loginValidation;

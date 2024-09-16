@@ -1,5 +1,6 @@
-const Category = require('../../models/category');
+import Category from '../../models/category.js';
 
+// Get a category
 const getCategory = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
@@ -26,4 +27,4 @@ const getCategory = async (req, res) => {
   }
 };
 
-module.exports = getCategory;
+export default getCategory;

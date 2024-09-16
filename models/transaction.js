@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 // Define the transaction schema
-const transactionSchema = new mongoose.Schema({
+const transactionSchema = new Schema({
   amount: {
     type: Number,
     required: [true, 'Transaction amount is required'],
@@ -20,17 +20,17 @@ const transactionSchema = new mongoose.Schema({
     default: Date.now,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true,
   },
   subcategory: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Subcategory',
     required: false,
   },
@@ -38,6 +38,6 @@ const transactionSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-const Transaction = mongoose.model('Transaction', transactionSchema);
+const Transaction = model('Transaction', transactionSchema);
 
-module.exports = Transaction;
+export default Transaction;

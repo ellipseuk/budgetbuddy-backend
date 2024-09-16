@@ -1,6 +1,8 @@
-const { validationResult } = require('express-validator');
-const User = require('../../models/user');
-const jwt = require('jsonwebtoken');
+import { validationResult } from 'express-validator';
+import User from '../../models/user.js';
+import pkg from 'jsonwebtoken';
+
+const { sign } = pkg;
 
 // Login a user
 const loginUser = async (req, res) => {
@@ -31,7 +33,7 @@ const loginUser = async (req, res) => {
     }
 
     // Generate a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({
       status: 'success',
@@ -51,4 +53,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = loginUser;
+export default loginUser;
