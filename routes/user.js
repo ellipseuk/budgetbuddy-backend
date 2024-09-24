@@ -10,9 +10,13 @@ import deleteUser from '../controllers/users/deleteUser.js';
 import registerUser from '../controllers/users/registerUser.js';
 import loginUser from '../controllers/users/loginUser.js';
 
-// Import the registerValidation and loginValidation middlewares
+//
 import registerValidation from '../validators/users/registerValidation.js';
 import loginValidation from '../validators/users/loginValidation.js';
+import { 
+  validateEmailSyntax, 
+  checkMXRecord, 
+  checkDisposableEmail } from '../validators/users/emailValidation.js';
 
 const router = Router();
 
@@ -27,7 +31,7 @@ router
   .patch(updateUser)
   .delete(deleteUser);
 
-router.post('/register', registerValidation, registerUser);
+router.post('/register', [validateEmailSyntax, checkMXRecord, checkDisposableEmail], registerValidation, registerUser);
 router.post('/login', loginValidation, loginUser);
 
 export default router;
