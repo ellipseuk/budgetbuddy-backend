@@ -1,15 +1,18 @@
-import dotenv from 'dotenv';
-import app from './app.js';
-import connectDB from './config/db.js';
+// write a vasic server.js exprees server
+// 1. create a server
+// 2. create a route
+// 3. listen to the port
 
-// Load environment variables
-dotenv.config();
+const express = require('express');
+const app = express();
+const port = 3000;
 
-// Connect to database
-connectDB();
+app.get('/', (req, res) => {
+    res.send('Hello World');
+}
+);
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`The server is running on port: ${PORT}`);
-});
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+}
+);
